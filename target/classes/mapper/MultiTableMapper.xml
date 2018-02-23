@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webike.dao.MultiTableMapper" >
+    <resultMap id="BaseResultMap" type="com.webike.pojo.BikeCategory" >
+        <id column="bid" property="bid" jdbcType="INTEGER" />
+        <result column="b_name" property="bName" jdbcType="VARCHAR" />
+        <result column="b_icon" property="bIcon" jdbcType="VARCHAR" />
+        <result column="b_cid" property="bCid" jdbcType="INTEGER" />
+        <result column="b_in_time" property="bInTime" jdbcType="VARCHAR" />
+        <result column="b_state" property="bState" jdbcType="VARCHAR" />
+        <result column="b_create_time" property="bCreateTime" jdbcType="TIMESTAMP" />
+        <result column="b_update_time" property="bUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="b_comment" property="bComment" jdbcType="VARCHAR" />
+        <result column="cid" property="cid" jdbcType="INTEGER" />
+        <result column="c_name" property="cName" jdbcType="VARCHAR" />
+        <result column="c_remain" property="cRemain" jdbcType="INTEGER" />
+        <result column="c_rent" property="cRent" jdbcType="REAL" />
+        <result column="c_cash" property="cCash" jdbcType="REAL" />
+        <result column="c_create_time" property="cCreateTime" jdbcType="TIMESTAMP" />
+        <result column="c_update_time" property="cUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="c_comment" property="cComment" jdbcType="VARCHAR" />
+        <result column="c_price" property="cPrice" jdbcType="REAL" />
+    </resultMap>
+
+
+
+    <select id="getBikeAndCategory" resultMap="BaseResultMap">
+        select * from bike b join category c on b.b_cid = c.cid;
+    </select>
+
+</mapper>

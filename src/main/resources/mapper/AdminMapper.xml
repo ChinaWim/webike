@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webike.dao.AdminMapper" >
+    <resultMap id="BaseResultMap" type="com.webike.pojo.Admin" >
+        <id column="aid" property="aid" jdbcType="INTEGER" />
+        <result column="a_pid" property="aPid" jdbcType="INTEGER" />
+        <result column="a_username" property="aUsername" jdbcType="VARCHAR" />
+        <result column="a_password" property="aPassword" jdbcType="VARCHAR" />
+        <result column="a_real_name" property="aRealName" jdbcType="VARCHAR" />
+        <result column="a_phone" property="aPhone" jdbcType="VARCHAR" />
+        <result column="a_role" property="aRole" jdbcType="VARCHAR" />
+        <result column="a_icon" property="aIcon" jdbcType="VARCHAR" />
+        <result column="a_login_time" property="aLoginTime" jdbcType="TIMESTAMP" />
+        <result column="a_create_time" property="aCreateTime" jdbcType="TIMESTAMP" />
+        <result column="a_update_time" property="aUpdateTime" jdbcType="TIMESTAMP" />
+        <result column="a_comment" property="aComment" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="findToPage" resultMap="BaseResultMap" parameterType="Integer">
+        select * from admin order by a_update_time desc ;
+    </select>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+    aid, a_pid, a_username, a_password, a_real_name, a_phone, a_role, a_icon, a_login_time, 
+    a_create_time, a_update_time, a_comment
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.webike.pojo.AdminExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from admin
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from admin
+        where aid = #{aid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin
+    where aid = #{aid,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.webike.pojo.AdminExample" >
+        delete from admin
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.webike.pojo.Admin" >
+    insert into admin (aid, a_pid, a_username, 
+      a_password, a_real_name, a_phone, 
+      a_role, a_icon, a_login_time, 
+      a_create_time, a_update_time, a_comment
+      )
+    values (#{aid,jdbcType=INTEGER}, #{aPid,jdbcType=INTEGER}, #{aUsername,jdbcType=VARCHAR}, 
+      #{aPassword,jdbcType=VARCHAR}, #{aRealName,jdbcType=VARCHAR}, #{aPhone,jdbcType=VARCHAR}, 
+      #{aRole,jdbcType=VARCHAR}, #{aIcon,jdbcType=VARCHAR}, #{aLoginTime,jdbcType=TIMESTAMP}, 
+      #{aCreateTime,jdbcType=TIMESTAMP}, #{aUpdateTime,jdbcType=TIMESTAMP}, #{aComment,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.webike.pojo.Admin" >
+        insert into admin
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="aid != null" >
+                aid,
+            </if>
+            <if test="aPid != null" >
+                a_pid,
+            </if>
+            <if test="aUsername != null" >
+                a_username,
+            </if>
+            <if test="aPassword != null" >
+                a_password,
+            </if>
+            <if test="aRealName != null" >
+                a_real_name,
+            </if>
+            <if test="aPhone != null" >
+                a_phone,
+            </if>
+            <if test="aRole != null" >
+                a_role,
+            </if>
+            <if test="aIcon != null" >
+                a_icon,
+            </if>
+            <if test="aLoginTime != null" >
+                a_login_time,
+            </if>
+            <if test="aCreateTime != null" >
+                a_create_time,
+            </if>
+            <if test="aUpdateTime != null" >
+                a_update_time,
+            </if>
+            <if test="aComment != null" >
+                a_comment,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="aid != null" >
+                #{aid,jdbcType=INTEGER},
+            </if>
+            <if test="aPid != null" >
+                #{aPid,jdbcType=INTEGER},
+            </if>
+            <if test="aUsername != null" >
+                #{aUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="aPassword != null" >
+                #{aPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="aRealName != null" >
+                #{aRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="aPhone != null" >
+                #{aPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="aRole != null" >
+                #{aRole,jdbcType=VARCHAR},
+            </if>
+            <if test="aIcon != null" >
+                #{aIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="aLoginTime != null" >
+                #{aLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="aCreateTime != null" >
+                #{aCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="aUpdateTime != null" >
+                #{aUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="aComment != null" >
+                #{aComment,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.webike.pojo.AdminExample" resultType="java.lang.Integer" >
+        select count(*) from admin
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update admin
+        <set >
+            <if test="record.aid != null" >
+                aid = #{record.aid,jdbcType=INTEGER},
+            </if>
+            <if test="record.aPid != null" >
+                a_pid = #{record.aPid,jdbcType=INTEGER},
+            </if>
+            <if test="record.aUsername != null" >
+                a_username = #{record.aUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="record.aPassword != null" >
+                a_password = #{record.aPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="record.aRealName != null" >
+                a_real_name = #{record.aRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.aPhone != null" >
+                a_phone = #{record.aPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.aRole != null" >
+                a_role = #{record.aRole,jdbcType=VARCHAR},
+            </if>
+            <if test="record.aIcon != null" >
+                a_icon = #{record.aIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="record.aLoginTime != null" >
+                a_login_time = #{record.aLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.aCreateTime != null" >
+                a_create_time = #{record.aCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.aUpdateTime != null" >
+                a_update_time = #{record.aUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.aComment != null" >
+                a_comment = #{record.aComment,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update admin
+        set aid = #{record.aid,jdbcType=INTEGER},
+        a_pid = #{record.aPid,jdbcType=INTEGER},
+        a_username = #{record.aUsername,jdbcType=VARCHAR},
+        a_password = #{record.aPassword,jdbcType=VARCHAR},
+        a_real_name = #{record.aRealName,jdbcType=VARCHAR},
+        a_phone = #{record.aPhone,jdbcType=VARCHAR},
+        a_role = #{record.aRole,jdbcType=VARCHAR},
+        a_icon = #{record.aIcon,jdbcType=VARCHAR},
+        a_login_time = #{record.aLoginTime,jdbcType=TIMESTAMP},
+        a_create_time = #{record.aCreateTime,jdbcType=TIMESTAMP},
+        a_update_time = #{record.aUpdateTime,jdbcType=TIMESTAMP},
+        a_comment = #{record.aComment,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.webike.pojo.Admin" >
+        update admin
+        <set >
+            <if test="aPid != null" >
+                a_pid = #{aPid,jdbcType=INTEGER},
+            </if>
+            <if test="aUsername != null" >
+                a_username = #{aUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="aPassword != null" >
+                a_password = #{aPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="aRealName != null" >
+                a_real_name = #{aRealName,jdbcType=VARCHAR},
+            </if>
+            <if test="aPhone != null" >
+                a_phone = #{aPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="aRole != null" >
+                a_role = #{aRole,jdbcType=VARCHAR},
+            </if>
+            <if test="aIcon != null" >
+                a_icon = #{aIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="aLoginTime != null" >
+                a_login_time = #{aLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="aCreateTime != null" >
+                a_create_time = #{aCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="aUpdateTime != null" >
+                a_update_time = #{aUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="aComment != null" >
+                a_comment = #{aComment,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where aid = #{aid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.webike.pojo.Admin" >
+    update admin
+    set a_pid = #{aPid,jdbcType=INTEGER},
+      a_username = #{aUsername,jdbcType=VARCHAR},
+      a_password = #{aPassword,jdbcType=VARCHAR},
+      a_real_name = #{aRealName,jdbcType=VARCHAR},
+      a_phone = #{aPhone,jdbcType=VARCHAR},
+      a_role = #{aRole,jdbcType=VARCHAR},
+      a_icon = #{aIcon,jdbcType=VARCHAR},
+      a_login_time = #{aLoginTime,jdbcType=TIMESTAMP},
+      a_create_time = #{aCreateTime,jdbcType=TIMESTAMP},
+      a_update_time = #{aUpdateTime,jdbcType=TIMESTAMP},
+      a_comment = #{aComment,jdbcType=VARCHAR}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+</mapper>

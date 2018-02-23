@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webike.dao.BikeMapper" >
+  <resultMap id="BaseResultMap" type="com.webike.pojo.Bike" >
+    <id column="bid" property="bid" jdbcType="INTEGER" />
+    <result column="b_name" property="bName" jdbcType="VARCHAR" />
+    <result column="b_icon" property="bIcon" jdbcType="VARCHAR" />
+    <result column="b_cid" property="bCid" jdbcType="INTEGER" />
+    <result column="b_in_time" property="bInTime" jdbcType="VARCHAR" />
+    <result column="b_state" property="bState" jdbcType="VARCHAR" />
+    <result column="b_create_time" property="bCreateTime" jdbcType="TIMESTAMP" />
+    <result column="b_update_time" property="bUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="b_comment" property="bComment" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="findToPage" parameterType="Integer" resultMap="BaseResultMap">
+    select * from bike  order by bike.b_update_time desc ;
+  </select>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    bid, b_name, b_icon, b_cid, b_in_time, b_state, b_create_time, b_update_time, b_comment
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.webike.pojo.BikeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bike
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bike
+    where bid = #{bid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bike
+    where bid = #{bid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.webike.pojo.BikeExample" >
+    delete from bike
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.webike.pojo.Bike" >
+    insert into bike (bid, b_name, b_icon, 
+      b_cid, b_in_time, b_state, 
+      b_create_time, b_update_time, b_comment
+      )
+    values (#{bid,jdbcType=INTEGER}, #{bName,jdbcType=VARCHAR}, #{bIcon,jdbcType=VARCHAR}, 
+      #{bCid,jdbcType=INTEGER}, #{bInTime,jdbcType=VARCHAR}, #{bState,jdbcType=VARCHAR}, 
+      #{bCreateTime,jdbcType=TIMESTAMP}, #{bUpdateTime,jdbcType=TIMESTAMP}, #{bComment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.webike.pojo.Bike" >
+    insert into bike
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bid != null" >
+        bid,
+      </if>
+      <if test="bName != null" >
+        b_name,
+      </if>
+      <if test="bIcon != null" >
+        b_icon,
+      </if>
+      <if test="bCid != null" >
+        b_cid,
+      </if>
+      <if test="bInTime != null" >
+        b_in_time,
+      </if>
+      <if test="bState != null" >
+        b_state,
+      </if>
+      <if test="bCreateTime != null" >
+        b_create_time,
+      </if>
+      <if test="bUpdateTime != null" >
+        b_update_time,
+      </if>
+      <if test="bComment != null" >
+        b_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bid != null" >
+        #{bid,jdbcType=INTEGER},
+      </if>
+      <if test="bName != null" >
+        #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bIcon != null" >
+        #{bIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="bCid != null" >
+        #{bCid,jdbcType=INTEGER},
+      </if>
+      <if test="bInTime != null" >
+        #{bInTime,jdbcType=VARCHAR},
+      </if>
+      <if test="bState != null" >
+        #{bState,jdbcType=VARCHAR},
+      </if>
+      <if test="bCreateTime != null" >
+        #{bCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bUpdateTime != null" >
+        #{bUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bComment != null" >
+        #{bComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.webike.pojo.BikeExample" resultType="java.lang.Integer" >
+    select count(*) from bike
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bike
+    <set >
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bName != null" >
+        b_name = #{record.bName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bIcon != null" >
+        b_icon = #{record.bIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bCid != null" >
+        b_cid = #{record.bCid,jdbcType=INTEGER},
+      </if>
+      <if test="record.bInTime != null" >
+        b_in_time = #{record.bInTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bState != null" >
+        b_state = #{record.bState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bCreateTime != null" >
+        b_create_time = #{record.bCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bUpdateTime != null" >
+        b_update_time = #{record.bUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bComment != null" >
+        b_comment = #{record.bComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bike
+    set bid = #{record.bid,jdbcType=INTEGER},
+      b_name = #{record.bName,jdbcType=VARCHAR},
+      b_icon = #{record.bIcon,jdbcType=VARCHAR},
+      b_cid = #{record.bCid,jdbcType=INTEGER},
+      b_in_time = #{record.bInTime,jdbcType=VARCHAR},
+      b_state = #{record.bState,jdbcType=VARCHAR},
+      b_create_time = #{record.bCreateTime,jdbcType=TIMESTAMP},
+      b_update_time = #{record.bUpdateTime,jdbcType=TIMESTAMP},
+      b_comment = #{record.bComment,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webike.pojo.Bike" >
+    update bike
+    <set >
+      <if test="bName != null" >
+        b_name = #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bIcon != null" >
+        b_icon = #{bIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="bCid != null" >
+        b_cid = #{bCid,jdbcType=INTEGER},
+      </if>
+      <if test="bInTime != null" >
+        b_in_time = #{bInTime,jdbcType=VARCHAR},
+      </if>
+      <if test="bState != null" >
+        b_state = #{bState,jdbcType=VARCHAR},
+      </if>
+      <if test="bCreateTime != null" >
+        b_create_time = #{bCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bUpdateTime != null" >
+        b_update_time = #{bUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bComment != null" >
+        b_comment = #{bComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bid = #{bid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webike.pojo.Bike" >
+    update bike
+    set b_name = #{bName,jdbcType=VARCHAR},
+      b_icon = #{bIcon,jdbcType=VARCHAR},
+      b_cid = #{bCid,jdbcType=INTEGER},
+      b_in_time = #{bInTime,jdbcType=VARCHAR},
+      b_state = #{bState,jdbcType=VARCHAR},
+      b_create_time = #{bCreateTime,jdbcType=TIMESTAMP},
+      b_update_time = #{bUpdateTime,jdbcType=TIMESTAMP},
+      b_comment = #{bComment,jdbcType=VARCHAR}
+    where bid = #{bid,jdbcType=INTEGER}
+  </update>
+</mapper>

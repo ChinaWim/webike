@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webike.dao.CategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.webike.pojo.Category" >
+    <id column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="c_name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_remain" property="cRemain" jdbcType="INTEGER" />
+    <result column="c_rent" property="cRent" jdbcType="REAL" />
+    <result column="c_cash" property="cCash" jdbcType="REAL" />
+    <result column="c_create_time" property="cCreateTime" jdbcType="TIMESTAMP" />
+    <result column="c_update_time" property="cUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="c_comment" property="cComment" jdbcType="VARCHAR" />
+    <result column="c_price" property="cPrice" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cid, c_name, c_remain, c_rent, c_cash, c_create_time, c_update_time, c_comment, c_price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.webike.pojo.CategoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from category
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from category
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.webike.pojo.CategoryExample" >
+    delete from category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.webike.pojo.Category" >
+    insert into category (cid, c_name, c_remain, 
+      c_rent, c_cash, c_create_time, 
+      c_update_time, c_comment, c_price
+      )
+    values (#{cid,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{cRemain,jdbcType=INTEGER}, 
+      #{cRent,jdbcType=REAL}, #{cCash,jdbcType=REAL}, #{cCreateTime,jdbcType=TIMESTAMP}, 
+      #{cUpdateTime,jdbcType=TIMESTAMP}, #{cComment,jdbcType=VARCHAR}, #{cPrice,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.webike.pojo.Category" >
+    insert into category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="cName != null" >
+        c_name,
+      </if>
+      <if test="cRemain != null" >
+        c_remain,
+      </if>
+      <if test="cRent != null" >
+        c_rent,
+      </if>
+      <if test="cCash != null" >
+        c_cash,
+      </if>
+      <if test="cCreateTime != null" >
+        c_create_time,
+      </if>
+      <if test="cUpdateTime != null" >
+        c_update_time,
+      </if>
+      <if test="cComment != null" >
+        c_comment,
+      </if>
+      <if test="cPrice != null" >
+        c_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cName != null" >
+        #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cRemain != null" >
+        #{cRemain,jdbcType=INTEGER},
+      </if>
+      <if test="cRent != null" >
+        #{cRent,jdbcType=REAL},
+      </if>
+      <if test="cCash != null" >
+        #{cCash,jdbcType=REAL},
+      </if>
+      <if test="cCreateTime != null" >
+        #{cCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUpdateTime != null" >
+        #{cUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cComment != null" >
+        #{cComment,jdbcType=VARCHAR},
+      </if>
+      <if test="cPrice != null" >
+        #{cPrice,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.webike.pojo.CategoryExample" resultType="java.lang.Integer" >
+    select count(*) from category
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update category
+    <set >
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cName != null" >
+        c_name = #{record.cName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cRemain != null" >
+        c_remain = #{record.cRemain,jdbcType=INTEGER},
+      </if>
+      <if test="record.cRent != null" >
+        c_rent = #{record.cRent,jdbcType=REAL},
+      </if>
+      <if test="record.cCash != null" >
+        c_cash = #{record.cCash,jdbcType=REAL},
+      </if>
+      <if test="record.cCreateTime != null" >
+        c_create_time = #{record.cCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cUpdateTime != null" >
+        c_update_time = #{record.cUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cComment != null" >
+        c_comment = #{record.cComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cPrice != null" >
+        c_price = #{record.cPrice,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update category
+    set cid = #{record.cid,jdbcType=INTEGER},
+      c_name = #{record.cName,jdbcType=VARCHAR},
+      c_remain = #{record.cRemain,jdbcType=INTEGER},
+      c_rent = #{record.cRent,jdbcType=REAL},
+      c_cash = #{record.cCash,jdbcType=REAL},
+      c_create_time = #{record.cCreateTime,jdbcType=TIMESTAMP},
+      c_update_time = #{record.cUpdateTime,jdbcType=TIMESTAMP},
+      c_comment = #{record.cComment,jdbcType=VARCHAR},
+      c_price = #{record.cPrice,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webike.pojo.Category" >
+    update category
+    <set >
+      <if test="cName != null" >
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="cRemain != null" >
+        c_remain = #{cRemain,jdbcType=INTEGER},
+      </if>
+      <if test="cRent != null" >
+        c_rent = #{cRent,jdbcType=REAL},
+      </if>
+      <if test="cCash != null" >
+        c_cash = #{cCash,jdbcType=REAL},
+      </if>
+      <if test="cCreateTime != null" >
+        c_create_time = #{cCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cUpdateTime != null" >
+        c_update_time = #{cUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cComment != null" >
+        c_comment = #{cComment,jdbcType=VARCHAR},
+      </if>
+      <if test="cPrice != null" >
+        c_price = #{cPrice,jdbcType=REAL},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webike.pojo.Category" >
+    update category
+    set c_name = #{cName,jdbcType=VARCHAR},
+      c_remain = #{cRemain,jdbcType=INTEGER},
+      c_rent = #{cRent,jdbcType=REAL},
+      c_cash = #{cCash,jdbcType=REAL},
+      c_create_time = #{cCreateTime,jdbcType=TIMESTAMP},
+      c_update_time = #{cUpdateTime,jdbcType=TIMESTAMP},
+      c_comment = #{cComment,jdbcType=VARCHAR},
+      c_price = #{cPrice,jdbcType=REAL}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webike.dao.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.webike.pojo.Student" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="sno" property="sno" jdbcType="VARCHAR" />
+    <result column="s_name" property="sName" jdbcType="VARCHAR" />
+    <result column="s_sex" property="sSex" jdbcType="CHAR" />
+    <result column="s_id_card" property="sIdCard" jdbcType="VARCHAR" />
+    <result column="s_email" property="sEmail" jdbcType="VARCHAR" />
+    <result column="s_phone" property="sPhone" jdbcType="VARCHAR" />
+    <result column="s_icon" property="sIcon" jdbcType="VARCHAR" />
+    <result column="s_department" property="sDepartment" jdbcType="VARCHAR" />
+    <result column="s_major" property="sMajor" jdbcType="VARCHAR" />
+    <result column="s_create_time" property="sCreateTime" jdbcType="TIMESTAMP" />
+    <result column="s_update_time" property="sUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="s_comment" property="sComment" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="findToPage" parameterType="Integer" resultMap="BaseResultMap">
+    select * from student  order by student.s_create_time desc;
+  </select>
+
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sid, sno, s_name, s_sex, s_id_card, s_email, s_phone, s_icon, s_department, s_major, 
+    s_create_time, s_update_time, s_comment
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.webike.pojo.StudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.webike.pojo.StudentExample" >
+    delete from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.webike.pojo.Student" >
+    insert into student (sid, sno, s_name, 
+      s_sex, s_id_card, s_email, 
+      s_phone, s_icon, s_department, 
+      s_major, s_create_time, s_update_time, 
+      s_comment)
+    values (#{sid,jdbcType=INTEGER}, #{sno,jdbcType=VARCHAR}, #{sName,jdbcType=VARCHAR}, 
+      #{sSex,jdbcType=CHAR}, #{sIdCard,jdbcType=VARCHAR}, #{sEmail,jdbcType=VARCHAR}, 
+      #{sPhone,jdbcType=VARCHAR}, #{sIcon,jdbcType=VARCHAR}, #{sDepartment,jdbcType=VARCHAR}, 
+      #{sMajor,jdbcType=VARCHAR}, #{sCreateTime,jdbcType=TIMESTAMP}, #{sUpdateTime,jdbcType=TIMESTAMP}, 
+      #{sComment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.webike.pojo.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="sName != null" >
+        s_name,
+      </if>
+      <if test="sSex != null" >
+        s_sex,
+      </if>
+      <if test="sIdCard != null" >
+        s_id_card,
+      </if>
+      <if test="sEmail != null" >
+        s_email,
+      </if>
+      <if test="sPhone != null" >
+        s_phone,
+      </if>
+      <if test="sIcon != null" >
+        s_icon,
+      </if>
+      <if test="sDepartment != null" >
+        s_department,
+      </if>
+      <if test="sMajor != null" >
+        s_major,
+      </if>
+      <if test="sCreateTime != null" >
+        s_create_time,
+      </if>
+      <if test="sUpdateTime != null" >
+        s_update_time,
+      </if>
+      <if test="sComment != null" >
+        s_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="sno != null" >
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sSex != null" >
+        #{sSex,jdbcType=CHAR},
+      </if>
+      <if test="sIdCard != null" >
+        #{sIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sEmail != null" >
+        #{sEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="sPhone != null" >
+        #{sPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="sIcon != null" >
+        #{sIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="sDepartment != null" >
+        #{sDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="sMajor != null" >
+        #{sMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="sCreateTime != null" >
+        #{sCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sUpdateTime != null" >
+        #{sUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sComment != null" >
+        #{sComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.webike.pojo.StudentExample" resultType="java.lang.Integer" >
+    select count(*) from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update student
+    <set >
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sno != null" >
+        sno = #{record.sno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sName != null" >
+        s_name = #{record.sName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sSex != null" >
+        s_sex = #{record.sSex,jdbcType=CHAR},
+      </if>
+      <if test="record.sIdCard != null" >
+        s_id_card = #{record.sIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sEmail != null" >
+        s_email = #{record.sEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sPhone != null" >
+        s_phone = #{record.sPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sIcon != null" >
+        s_icon = #{record.sIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sDepartment != null" >
+        s_department = #{record.sDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sMajor != null" >
+        s_major = #{record.sMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sCreateTime != null" >
+        s_create_time = #{record.sCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sUpdateTime != null" >
+        s_update_time = #{record.sUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sComment != null" >
+        s_comment = #{record.sComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update student
+    set sid = #{record.sid,jdbcType=INTEGER},
+      sno = #{record.sno,jdbcType=VARCHAR},
+      s_name = #{record.sName,jdbcType=VARCHAR},
+      s_sex = #{record.sSex,jdbcType=CHAR},
+      s_id_card = #{record.sIdCard,jdbcType=VARCHAR},
+      s_email = #{record.sEmail,jdbcType=VARCHAR},
+      s_phone = #{record.sPhone,jdbcType=VARCHAR},
+      s_icon = #{record.sIcon,jdbcType=VARCHAR},
+      s_department = #{record.sDepartment,jdbcType=VARCHAR},
+      s_major = #{record.sMajor,jdbcType=VARCHAR},
+      s_create_time = #{record.sCreateTime,jdbcType=TIMESTAMP},
+      s_update_time = #{record.sUpdateTime,jdbcType=TIMESTAMP},
+      s_comment = #{record.sComment,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webike.pojo.Student" >
+    update student
+    <set >
+      <if test="sno != null" >
+        sno = #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null" >
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sSex != null" >
+        s_sex = #{sSex,jdbcType=CHAR},
+      </if>
+      <if test="sIdCard != null" >
+        s_id_card = #{sIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sEmail != null" >
+        s_email = #{sEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="sPhone != null" >
+        s_phone = #{sPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="sIcon != null" >
+        s_icon = #{sIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="sDepartment != null" >
+        s_department = #{sDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="sMajor != null" >
+        s_major = #{sMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="sCreateTime != null" >
+        s_create_time = #{sCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sUpdateTime != null" >
+        s_update_time = #{sUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sComment != null" >
+        s_comment = #{sComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webike.pojo.Student" >
+    update student
+    set sno = #{sno,jdbcType=VARCHAR},
+      s_name = #{sName,jdbcType=VARCHAR},
+      s_sex = #{sSex,jdbcType=CHAR},
+      s_id_card = #{sIdCard,jdbcType=VARCHAR},
+      s_email = #{sEmail,jdbcType=VARCHAR},
+      s_phone = #{sPhone,jdbcType=VARCHAR},
+      s_icon = #{sIcon,jdbcType=VARCHAR},
+      s_department = #{sDepartment,jdbcType=VARCHAR},
+      s_major = #{sMajor,jdbcType=VARCHAR},
+      s_create_time = #{sCreateTime,jdbcType=TIMESTAMP},
+      s_update_time = #{sUpdateTime,jdbcType=TIMESTAMP},
+      s_comment = #{sComment,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,60 @@
+﻿@CHARSET "UTF-8";
+
+/*a:link {
+	color: #0080ff;
+}*/ /*未被访问的链接*/
+/*a:hover {
+	color: #ff0000;
+}*/ /* 鼠标指针移动到链接上 */
+/* a:visited {color:#ff0000;} */ /* 已被访问的链接 */
+* {
+	margin: 0;
+	padding: 0;
+}
+a{
+	text-decoration: none; /*去掉下划线*/
+}
+table {
+	margin: 0 auto;
+}
+
+.loginTitle {
+	/*color: #a2fff6;*/
+	font-family: MyNewFont;
+	font-size: 80px;
+}
+.slogan{
+	color: #d8d8d8;
+	font-size: 20px;
+}
+
+.secondDiv {
+	background: rgba(0, 0, 0, 0.5);
+	width: 100%;
+	height: 100%;
+	MARGIN: 0px auto;
+}
+
+.formDiv {
+	background-color: #ffffff;
+	margin: 0 auto;
+	width: 470px;
+	height: 340px;
+	border: 5px solid #8cd0ff;
+	border-radius: 50px;
+}
+
+h1{
+	color:#ff80ff;
+}
+
+.topDiv {
+	background-image: url("../images/login/body.png");
+	background-size:cover;
+	background-repeat: no-repeat;
+}
+
+@font-face {
+	font-family: 'MyNewFont';   /*字体名称*/
+	src: url('../fonts/樱花字体.ttf');       /*字体源文件*/
+}

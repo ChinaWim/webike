@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="webike:war">
+    <output-path>$PROJECT_DIR$/../webike/target</output-path>
+    <root id="archive" name="webike.war">
+      <element id="artifact" artifact-name="webike:war exploded" />
+    </root>
+  </artifact>
+</component>

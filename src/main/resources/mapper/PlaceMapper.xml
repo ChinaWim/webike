@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webike.dao.PlaceMapper" >
+  <resultMap id="BaseResultMap" type="com.webike.pojo.Place" >
+    <id column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="p_name" property="pName" jdbcType="VARCHAR" />
+    <result column="p_address" property="pAddress" jdbcType="VARCHAR" />
+    <result column="p_phone" property="pPhone" jdbcType="VARCHAR" />
+    <result column="p_create_time" property="pCreateTime" jdbcType="TIMESTAMP" />
+    <result column="p_update_time" property="pUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="p_comment" property="pComment" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pid, p_name, p_address, p_phone, p_create_time, p_update_time, p_comment
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.webike.pojo.PlaceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from place
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from place
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from place
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.webike.pojo.PlaceExample" >
+    delete from place
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.webike.pojo.Place" >
+    insert into place (pid, p_name, p_address, 
+      p_phone, p_create_time, p_update_time, 
+      p_comment)
+    values (#{pid,jdbcType=INTEGER}, #{pName,jdbcType=VARCHAR}, #{pAddress,jdbcType=VARCHAR}, 
+      #{pPhone,jdbcType=VARCHAR}, #{pCreateTime,jdbcType=TIMESTAMP}, #{pUpdateTime,jdbcType=TIMESTAMP}, 
+      #{pComment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.webike.pojo.Place" >
+    insert into place
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="pName != null" >
+        p_name,
+      </if>
+      <if test="pAddress != null" >
+        p_address,
+      </if>
+      <if test="pPhone != null" >
+        p_phone,
+      </if>
+      <if test="pCreateTime != null" >
+        p_create_time,
+      </if>
+      <if test="pUpdateTime != null" >
+        p_update_time,
+      </if>
+      <if test="pComment != null" >
+        p_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pName != null" >
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pAddress != null" >
+        #{pAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="pPhone != null" >
+        #{pPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="pCreateTime != null" >
+        #{pCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pUpdateTime != null" >
+        #{pUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pComment != null" >
+        #{pComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.webike.pojo.PlaceExample" resultType="java.lang.Integer" >
+    select count(*) from place
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update place
+    <set >
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pName != null" >
+        p_name = #{record.pName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pAddress != null" >
+        p_address = #{record.pAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pPhone != null" >
+        p_phone = #{record.pPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pCreateTime != null" >
+        p_create_time = #{record.pCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pUpdateTime != null" >
+        p_update_time = #{record.pUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pComment != null" >
+        p_comment = #{record.pComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update place
+    set pid = #{record.pid,jdbcType=INTEGER},
+      p_name = #{record.pName,jdbcType=VARCHAR},
+      p_address = #{record.pAddress,jdbcType=VARCHAR},
+      p_phone = #{record.pPhone,jdbcType=VARCHAR},
+      p_create_time = #{record.pCreateTime,jdbcType=TIMESTAMP},
+      p_update_time = #{record.pUpdateTime,jdbcType=TIMESTAMP},
+      p_comment = #{record.pComment,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webike.pojo.Place" >
+    update place
+    <set >
+      <if test="pName != null" >
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pAddress != null" >
+        p_address = #{pAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="pPhone != null" >
+        p_phone = #{pPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="pCreateTime != null" >
+        p_create_time = #{pCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pUpdateTime != null" >
+        p_update_time = #{pUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pComment != null" >
+        p_comment = #{pComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webike.pojo.Place" >
+    update place
+    set p_name = #{pName,jdbcType=VARCHAR},
+      p_address = #{pAddress,jdbcType=VARCHAR},
+      p_phone = #{pPhone,jdbcType=VARCHAR},
+      p_create_time = #{pCreateTime,jdbcType=TIMESTAMP},
+      p_update_time = #{pUpdateTime,jdbcType=TIMESTAMP},
+      p_comment = #{pComment,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>
