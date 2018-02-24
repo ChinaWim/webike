@@ -1,7 +1,7 @@
 package com.webike.enums;
 
 /**
- * Created by 542585138 on 2018/2/8.
+ * Created by Ming on 2018/2/8.
  * 状态码
  */
 public enum ResultEnum {

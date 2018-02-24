@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by 542585138 on 2018/2/12.
+ * Created by Ming on 2018/2/12.
  */
 @Service
 public class PlaceServiceImpl implements PlaceService {

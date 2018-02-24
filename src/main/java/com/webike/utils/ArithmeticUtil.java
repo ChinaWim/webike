@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 /**常用算法操作Util
- * Created by 542585138 on 2018/2/11.
+ * Created by Ming on 2018/2/11.
  */
 public class ArithmeticUtil {
 

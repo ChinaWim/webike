@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Created by 542585138 on 2018/2/13.
+ * Created by Ming on 2018/2/13.
  */
 @Controller
 @RequestMapping("total")

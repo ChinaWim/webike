@@ -7,7 +7,7 @@ import com.webike.pojo.Place;
 import java.util.List;
 
 /**
- * Created by 542585138 on 2018/2/9.
+ * Created by Ming on 2018/2/9.
  */
 public interface PlaceService {
     List<Place> findAll();

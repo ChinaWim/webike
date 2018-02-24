@@ -1,5 +1,5 @@
 /**
- * @author 542585138
+ * @author Ming
  */
 var username = document.getElementById("username");
 var password = document.getElementById("password");

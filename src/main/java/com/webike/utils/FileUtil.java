@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Created by 542585138 on 2018/2/10.
+ * Created by Ming on 2018/2/10.
  */
 public class FileUtil {
     /**

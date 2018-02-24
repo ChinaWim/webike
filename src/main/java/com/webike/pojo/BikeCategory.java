@@ -3,7 +3,7 @@ package com.webike.pojo;
 import java.util.Date;
 
 /**
- * Created by 542585138 on 2018/2/14.
+ * Created by Ming on 2018/2/14.
  */
 public class BikeCategory {
 

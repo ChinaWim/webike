@@ -1,7 +1,7 @@
 package com.webike.enums;
 
 /**角色枚举
- * Created by 542585138 on 2018/2/12.
+ * Created by Ming on 2018/2/12.
  */
 public enum RoleEnum {
 

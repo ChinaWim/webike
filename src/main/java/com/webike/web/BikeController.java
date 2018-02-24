@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
- * Created by 542585138 on 2018/2/10.
+ * Created by Ming on 2018/2/10.
  */
 @Controller
 @RequestMapping("/bike")

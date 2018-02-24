@@ -39,7 +39,7 @@
         <img  src="images/login/bike.png" height="80px">
     </div>
     <div style="position:absolute; left: 35%;top: 10px">
-        <p  style="font-family: MyNewFont"><font color="#4ac9ff" size="7px">we</font><font size="7px" color="#ff508b">bike</font><font color="#" size="4px">广东科技学院共享单车管理系统</font></p>
+        <p  style="font-family: MyNewFont"><font color="#4ac9ff" size="7px">we</font><font size="7px" color="#ff508b">bike</font><font color="#" size="4px">&nbsp;共享单车管理系统</font></p>
     </div>
     <div style="position:absolute; right: 30px;top: 25px">
         <font color="red">[${sessionScope.admin.aRealName}]&nbsp;</font>${sessionScope.admin.aRole}&nbsp;你好!&nbsp;你上次登陆的时间是:<mark><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${sessionScope.admin.aLoginTime}" /></mark>

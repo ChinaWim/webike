@@ -4,7 +4,7 @@ import com.webike.enums.ResultEnum;
 
 /**
  * 返回给前端的json数据
- * Created by 542585138 on 2018/2/8.
+ * Created by Ming on 2018/2/8.
  */
 public class JsonResult {
 

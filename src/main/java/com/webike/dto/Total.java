@@ -1,7 +1,7 @@
 package com.webike.dto;
 
 /**汇总Bean
- * Created by 542585138 on 2018/2/13.
+ * Created by Ming on 2018/2/13.
  */
 public class Total {
     //租金流水

@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 /**管理员controller
- * Created by 542585138 on 2018/2/8.
+ * Created by Ming on 2018/2/8.
  */
 @Controller
 @RequestMapping("/admin")

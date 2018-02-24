@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * Created by 542585138 on 2018/2/11.
+ * Created by Ming on 2018/2/11.
  */
 @Controller
 @RequestMapping("/category")

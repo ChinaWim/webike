@@ -4,7 +4,7 @@ import org.springframework.util.DigestUtils;
 
 /**
  * MD5加密工具
- * Created by 542585138 on 2018/2/8.
+ * Created by Ming on 2018/2/8.
  */
 public class MD5Util {
     //盐值
