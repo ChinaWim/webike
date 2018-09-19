@@ -1,7 +1,7 @@
 # webike
 高校共享单车管理系统<br>
 <h2>说明</h2>
-前端页面使用EasyUI,后端使用ssm（本项目为ssm学习项目,前后独立完成）
+前端页面使用EasyUI,后端使用ssm（本项目为ssm实战项目,前后独立完成）
 <h3>效果</h3>
 <img src="https://github.com/Wayming233/webike/blob/master/images/login.png" />
 <img src="https://github.com/Wayming233/webike/blob/master/images/1.png" />
