@@ -1,6 +1,6 @@
 # webike
 高校共享单车管理系统<br>
-<h2>说明</h
+<h2>说明</h2>
 前端页面使用EasyUI,后端使用ssm（本项目为ssm实战项目,前后独立完成）<br/>
 <a href = "http://118.89.50.153:8080/webike">访问地址</a>(admin/admin)
 <h3>效果</h3>
